@@ -8,8 +8,6 @@ inputs:
 runs:
   using: 'node20'
   main: 'dist/index.js'
-outputs:
-  # Outputs will be dynamically set by the JavaScript code
 branding:
   icon: 'icon.png'
   color: 'blue'

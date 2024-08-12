@@ -93,7 +93,6 @@ async function run() {
       const value = execSync(`az keyvault secret show --name ${secret} --vault-name ${vaultName} --query value -o tsv`).toString().trim();
       core.setSecret(value);
       core.exportVariable(secret, value);
-      core.setOutput(secret, value); // Set each secret as an output
 
     });
 
