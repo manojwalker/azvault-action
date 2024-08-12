@@ -1,38 +1,29 @@
-# Fetch Secrets GitHub Action
+# Fetch Secrets
 
-## Description
-
-The **Fetch Secrets** GitHub Action fetches secrets from Azure Key Vault and sets them as variables in your GitHub Actions workflow. This action helps you securely manage and use secrets stored in Azure Key Vault within your CI/CD pipelines.
+This GitHub Action fetches secrets from an Azure Key Vault and sets them as environment variables and outputs.
 
 ## Inputs
 
-### Required Inputs
+### `vault-name`
 
-- `vault-name`: The name of the Azure Key Vault from which to fetch secrets. This input is required and must be a string.
+**Required** The name of the Azure Key Vault.
 
 ## Outputs
 
-This action does not produce any outputs.
-
-## Secrets
-
-This action does not use any secrets directly. However, it is expected that the Azure Key Vault and its secrets are managed securely.
+The action dynamically sets outputs for each secret fetched from the Azure Key Vault. Each secret's name will be used as the output key.
 
 ## Environment Variables
 
-This action uses the following environment variables:
+The following environment variables must be set for the action to authenticate with Azure:
 
 - `AZURE_CLIENT_ID`: The client ID of the Azure service principal.
-- `AZURE_CLIENT_SECRET`: The client secret of the Azure service principal.
+- `CLIENTSECRET`: The client secret of the Azure service principal.
 - `AZURE_TENANT_ID`: The tenant ID of the Azure service principal.
 
 ## Example Usage
 
-Here is an example of how to use the **Fetch Secrets** action in a GitHub Actions workflow:
-
 ```yaml
-name: Example Workflow
-
+name: Fetch Secrets Example
 on: [push]
 
 jobs:
@@ -43,14 +34,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Fetch secrets from Azure Key Vault
-        uses: your-username/azvault-action@v1
+        uses: HON-EIT/azvault-action@v1.0.6
         with:
           vault-name: 'your-key-vault-name'
         env:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          CLIENTSECRET: ${{ secrets.CLIENTSECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
-      # Add steps to use the fetched secrets
-      - name: Use secret
-        run: echo "Secret value is ${{ secrets.YOUR_SECRET_NAME }}"
+      - name: Use fetched secrets
+        run: |
+          echo "Secret 1: ${{ steps.fetch-secrets.outputs.secret1 }}"
+          echo "Secret 2: ${{ steps.fetch-secrets.outputs.secret2 }}"
+          # Add more secrets as needed
