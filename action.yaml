@@ -11,3 +11,4 @@ runs:
 branding:
   icon: 'icon.png'
   color: 'blue'
+  label: 'briefcase'
