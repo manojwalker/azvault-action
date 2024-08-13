@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Fetch secrets from Azure Key Vault
-        uses: HON-EIT/azvault-action@v1.0.6
+        uses: manojwalker/azvault-action@v1.0.17
         with:
           vault-name: 'your-key-vault-name'
         env:
