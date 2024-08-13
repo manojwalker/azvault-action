@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Fetch secrets from Azure Key Vault
-        id: fetch-secrsts
+        id: fetch-secrets
         uses: manojwalker/azvault-action@v1.0.16
         with:
           vault-name: 'your-key-vault-name'
