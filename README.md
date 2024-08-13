@@ -10,8 +10,9 @@ This GitHub Action fetches secrets from an Azure Key Vault and sets them as envi
 
 ## Outputs
 
-The action dynamically sets outputs for each secret fetched from the Azure Key Vault. Each secret's name will be used as the output key.
-
+Set the outputs with key and environment variable
+Example:-
+keyname: ${{ env.keyname }}
 ## Environment Variables
 
 The following environment variables must be set for the action to authenticate with Azure:
